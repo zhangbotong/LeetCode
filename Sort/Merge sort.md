@@ -11,12 +11,6 @@ import java.util.Arrays;
  */
 public class Sort {
     public static int[] tmp;
-    public static void main(String[] args) {
-        int[] arr = new int[]{2,3,4,1,5};
-        System.out.println(String.format("Before sort: %s", Arrays.toString(arr)));
-        arr = MergeSort(arr);
-        System.out.println(String.format("After sort: %s", Arrays.toString(arr)));
-    }
   
     public static int[] MergeSort(int[] arr) {
         tmp = new int[arr.length];
