@@ -1,4 +1,4 @@
-![Merge sort tree](https://github.com/zhangbotong/LeetCode/blob/master/assets/Merge sort tree.png)
+![MergeSort-biTree](https://github.com/zhangbotong/LeetCode/blob/master/assets/MergeSort-biTree.png)
 
 归并排序同二叉树后序遍历，只不过在根节点时进行操作（merge）
 
@@ -55,7 +55,7 @@ public class Sort {
 ```
 
 
-![Merge sort merge array](https://github.com/zhangbotong/LeetCode/blob/master/assets/Merge sort merge array.png)
+![MergeSort-mergeArray](https://github.com/zhangbotong/LeetCode/blob/master/assets/MergeSort-mergeArray.png)
 
 时间复杂度：子问题个数 x 解决一个子问题复杂度
 
