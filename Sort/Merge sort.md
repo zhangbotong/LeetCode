@@ -3,49 +3,40 @@
 归并排序同二叉树后序遍历，只不过在根节点时进行操作（merge）
 
 ``` java
-import java.util.Arrays;
-
-/**
- * @author Kyrie
- * @date 2022/2/24 10:14 AM
- */
-public class Sort {
-    public static int[] tmp;
-  
-    public static int[] MergeSort(int[] arr) {
-        tmp = new int[arr.length];
-        Sort(arr, 0, arr.length - 1);
-        return arr;
+    public int[] sortArray(int[] nums) {
+        mergeSort(nums, 0, nums.length - 1);
+        return nums;
     }
 
-    // arr[lo..hi]
-    public static void Sort (int[] arr, int lo, int hi) {
-        if (lo == hi){
-            return;
-        }
-        int mid = lo + (hi - lo) / 2;
-        Sort(arr, lo, mid); // 左子树
-        Sort(arr, mid + 1, hi); // 右子树
-        Merge(arr, lo, mid, hi); // 根节点
+    private void mergeSort (int[] array, int left, int right) {
+        // 递归终止条件
+        if (left >= right) return;
+        // 单层处理逻辑，先分，再合
+        int mid = left + (right - left) / 2;
+        mergeSort(array, left, mid);
+        mergeSort(array, mid + 1, right);
+        merge(array, left, mid, right);
     }
 
-    public static void Merge (int[] arr, int lo, int mid, int hi) {
-        tmp = Arrays.copyOf(arr, arr.length);
-        int i = lo, j = mid + 1;
-        for (int k = lo; k <= hi; k++){
+    // 合并 2 个有序数组 [left, mid] 和 [mid + 1, right](入口保证 left <= mid < right)
+    private void merge (int[] array, int left, int mid, int right) {
+        int[] tmp = new int[right - left + 1];
+        int i = left, j = mid + 1;
+        for (int k = 0; k <= right - left; k++) {
+            // i > mid 说明左边已经合并完了，直接把右边的元素放入 tmp
             if (i > mid){
-                arr[k] = tmp[j++];
-            } else if (j > hi){
-                arr[k] = tmp[i++];
-            } else if (tmp[i] < tmp[j]){
-                arr[k] = tmp[i++];
-            } else{
-                arr[k] = tmp[j++];
+                tmp[k] = array[j++];
+            }else if (j > right) {// j > right 说明右边已经合并完了，直接把左边的元素放入 tmp
+                tmp[k] = array[i++];
+            }else {// 左右都没合并完，比较大小，小的放入 tmp
+                tmp[k] = array[i] < array[j] ? array[i++] : array[j++];
             }
         }
+        // 把 tmp 中的元素放回 array
+        for (int k = left; k <= right; k++) {
+            array[k] = tmp[k - left];
+        }
     }
-
-}
 ```
 
 
